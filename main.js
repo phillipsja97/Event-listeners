@@ -43,24 +43,62 @@ const pies = [
 ];
 
 const printToDom = (toPrint, divId) => {
-    document.getElementById(divId).innerHTML += toPrint
+    document.getElementById(divId).innerHTML = toPrint
 };
 
 const pieBuilder = (piesArray) => {
+    let domString = ''
     for (let i = 0; i < piesArray.length; i++) {
         const pies = piesArray[i];
-        const domString = `
+        domString += `
         <div class="card">
         <h2>${pies.pieName}</h2> 
         <img src=${pies.image} alt='image of ${pies.pieName}' />
     </div>
         `
-        printToDom(domString, 'pie-zone')
+       
     };
+    printToDom(domString, 'pie-zone')
  };
 
-document.getElementById('cake').addEventListener('click',  () => {
-    console.log('🎂 is better')
-});
 
- pieBuilder(pies);
+// document.getElementById('zoe').addEventListener('click', before (event)
+
+const buttonClick = (event) => {
+    // figure out WHO the instructor is for the button we clicked on (target 
+    const instructor = event.target.id
+    // only get those pies from the list of all the pies
+    const selectedPies = []
+    for (let i = 0; i < pies.length; i++) {
+        const pie = pies[i]
+        if (pie.instructorsFavorite === instructor) {
+            selectedPies.push(pie)
+        };
+    };
+    // pass small list of pies back into the pie builder
+    pieBuilder(selectedPies);
+};
+
+// const buttonClick = (event) => {
+//     // figure out WHO the instructor is for the button we clicked on (target 
+//     const instructor = event.target.id
+//     // only get those pies from the list of all the pies
+//     const selectedPies = []
+//     for (let i = 0; i < pies.length; i++) {
+//         const pie = pies[i]
+//         if (pie.instructorsFavorite === instructor) {
+//             selectedPies.push(pie)
+//         };
+//     };
+//     // pass small list of pies back into the pie builder
+//     pieBuilder(selectedPies);
+// };
+
+document.getElementById('zoe').addEventListener('click', buttonClick);
+document.getElementById('michael').addEventListener('click', buttonClick);
+
+
+
+
+
+//  pieBuilder(pies);
